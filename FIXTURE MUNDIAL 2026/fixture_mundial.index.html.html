@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0E1A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mundial 2026">
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Copa%20Mundial%20FIFA%202026%22%2C%22short_name%22%3A%22Mundial%202026%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230A0E1A%22%2C%22theme_color%22%3A%22%230A0E1A%22%2C%22start_url%22%3A%22.%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%25200%2520100%2520100'%253E%253Crect%2520width%3D'100'%2520height%3D'100'%2520fill%3D'%25230A0E1A'%2520rx%3D'20'%2F%253E%253Ctext%2520y%3D'.9em'%2520font-size%3D'85'%2520x%3D'8'%253E%25F0%259F%258F%2586%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A0E1A' rx='20'/><text y='.9em' font-size='85' x='8'>🏆</text></svg>">
+<title>Copa Mundial FIFA 2026 — Fixture + Prode</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --gold:#C9A84C;--gold2:#E8CC7A;
+  --dark:#0A0E1A;--panel:#111827;--card:#1A2235;
+  --border:#2A3555;--text:#F0F4FF;--muted:#8899BB;
+  --green:#10B981;--red:#EF4444;--blue:#3B82F6;--purple:#8B5CF6;
+}
+.emoji{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif!important}
+html,body{height:100%;overflow:hidden}
+body{background:var(--dark);font-family:'Barlow',sans-serif;color:var(--text);display:flex;flex-direction:column;-webkit-text-size-adjust:100%}
+.m-flag,.tc-flag,.gb-flag,.m-flag,.br-slot .m-flag{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif!important}
+
+/* ── HEADER ── */
+.hdr{background:var(--panel);border-bottom:2px solid var(--gold);padding:10px 14px;flex-shrink:0}
+.hdr-in{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hdr-logo{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:#fff;line-height:1}
+.hdr-logo span{color:var(--gold)}
+.hdr-sub{font-family:'Barlow Condensed',sans-serif;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:1px}
+.hdr-pills{display:flex;gap:4px;flex-wrap:wrap}
+.pill{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);color:var(--gold2);font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:0.5px;padding:2px 6px;border-radius:8px;text-transform:uppercase;white-space:nowrap}
+
+/* ── NAV ── */
+.nav{background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-in{max-width:980px;margin:0 auto;display:flex;min-width:max-content}
+.nav-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;padding:10px 12px;cursor:pointer;white-space:nowrap;transition:all 0.15s;flex-shrink:0;display:flex;align-items:center;gap:4px}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── CONTENT ── */
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:65px}
+.content-in{max-width:980px;margin:0 auto;padding:12px 14px}
+.section{display:none}.section.active{display:block}
+
+/* ── SECTION HEADING ── */
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.sh-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:var(--gold)}
+.sh-date{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:8px}
+
+/* ── GRUPOS ── */
+.groups-wrap{display:flex;flex-direction:column;gap:14px}
+.group-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.gb-head{padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.gb-letter{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;line-height:1}
+.gb-sub{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.3);text-transform:uppercase}
+.gb-flags{display:flex;gap:3px}
+.gb-flag{font-size:15px;line-height:1;font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
+
+/* Match rows */
+.gb-matches{border-bottom:1px solid var(--border)}
+.m-row{display:grid;grid-template-columns:22px 52px 1fr auto 1fr 60px;align-items:center;gap:5px;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.m-row:last-child{border-bottom:none}
+.m-row.played{background:rgba(201,168,76,0.03)}
+.m-num{font-family:'Barlow Condensed',sans-serif;font-size:9px;color:#3D4F6E;letter-spacing:0.3px}
+.m-time{font-family:'Barlow Condensed',sans-serif;font-size:9px;color:var(--muted);letter-spacing:0.3px}
+.m-team{display:flex;align-items:center;gap:4px}
+.m-team.right{flex-direction:row-reverse}
+.m-flag{font-size:15px;line-height:1;flex-shrink:0;font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
+.m-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:500;color:#C0D0EA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-score{display:flex;align-items:center;gap:3px;justify-content:center}
+.s-inp{width:28px;height:26px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:5px;color:#fff;-webkit-text-fill-color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;text-align:center;padding:0;-moz-appearance:textfield;-webkit-appearance:none;appearance:none;transition:all 0.15s;touch-action:manipulation}
+.s-inp::-webkit-outer-spin-button,.s-inp::-webkit-inner-spin-button{-webkit-appearance:none}
+.s-inp:focus{outline:none;border-color:var(--gold);background:rgba(201,168,76,0.1);-webkit-text-fill-color:var(--gold);color:var(--gold)}
+.s-inp.filled{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.08);color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.s-dash{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#3D4F6E}
+.m-venue{font-family:'Barlow Condensed',sans-serif;font-size:8px;color:#3D4F6E;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Standings */
+.gb-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.std{width:100%;border-collapse:collapse;min-width:300px}
+.std th{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:0.5px;text-transform:uppercase;color:#3D4F6E;text-align:center;padding:5px 3px;border-bottom:1px solid rgba(255,255,255,0.06);font-weight:600}
+.std th.left{text-align:left;padding-left:8px}
+.std td{font-family:'Barlow Condensed',sans-serif;font-size:12px;text-align:center;padding:5px 3px;border-bottom:1px solid rgba(255,255,255,0.04);color:#8899BB}
+.std td.left{text-align:left;padding-left:4px}
+.std tr:last-child td{border-bottom:none}
+.std tr.cl td{background:rgba(16,185,129,0.05)}
+.std tr.po td{background:rgba(59,130,246,0.05)}
+.pos-b{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Barlow Condensed',sans-serif}
+.p1{background:#10B981;color:#fff}.p2{background:#3B82F6;color:#fff}
+.p3{background:rgba(255,255,255,0.1);color:#8899BB}.p4{background:rgba(255,255,255,0.04);color:#3D4F6E}
+.t-cell{display:flex;align-items:center;gap:5px}
+.tc-flag{font-size:14px;line-height:1;flex-shrink:0;font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
+.tc-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:500;color:#C0D0EA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
+.pts-c{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.5px}
+.dg-p{color:var(--green)}.dg-n{color:var(--red)}.dg-z{color:var(--muted)}
+.gb-legend{display:flex;gap:12px;padding:5px 10px;border-top:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,0.12)}
+.leg{display:flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:9px;color:#3D4F6E}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ── BRACKET (llave visual) ── */
+.bracket-container{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 0 12px}
+.bracket-tree{display:flex;gap:0;min-width:max-content;align-items:stretch;padding:8px}
+.br-round{display:flex;flex-direction:column;justify-content:space-around;min-width:0}
+.br-round-title{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:1.5px;text-align:center;padding:5px 10px;border-radius:8px 8px 0 0;color:#fff;margin-bottom:4px;white-space:nowrap}
+.br-matches{display:flex;flex-direction:column;gap:4px;flex:1;justify-content:space-around}
+.br-match{background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:175px;flex-shrink:0;transition:border-color 0.15s}
+.br-match:hover{border-color:rgba(201,168,76,0.3)}
+.br-match.champion{border:2px solid var(--gold);background:rgba(201,168,76,0.05)}
+.br-top-bar{padding:4px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.br-mnum{font-size:8px;color:#3D4F6E;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.3px}
+.br-mdate{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:0.5px}
+.br-venue{font-size:8px;color:var(--muted);font-family:'Barlow Condensed',sans-serif}
+.br-slot{display:flex;align-items:center;gap:5px;padding:5px 8px}
+.br-slot.top{border-bottom:1px dashed rgba(255,255,255,0.07)}
+.br-seed{font-family:'Barlow Condensed',sans-serif;font-size:9px;color:#3D4F6E;min-width:24px;flex-shrink:0;letter-spacing:0.3px}
+.br-team{flex:1;min-width:0}
+.br-team input{background:transparent;border:none;color:#C0D0EA;-webkit-text-fill-color:#C0D0EA;font-family:'Barlow Condensed',sans-serif;font-size:12px;width:100%;padding:0;-webkit-appearance:none;border-bottom:1px dashed rgba(255,255,255,0.08);padding-bottom:1px}
+.br-team input:focus{outline:none;color:#fff;-webkit-text-fill-color:#fff}
+.br-team input::placeholder{color:#3D4F6E;-webkit-text-fill-color:#3D4F6E}
+.br-score{width:26px;height:22px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:#fff;-webkit-text-fill-color:#fff;font-family:'Bebas Neue',sans-serif;font-size:14px;text-align:center;padding:0;-moz-appearance:textfield;-webkit-appearance:none;flex-shrink:0;touch-action:manipulation}
+.br-score::-webkit-outer-spin-button,.br-score::-webkit-inner-spin-button{-webkit-appearance:none}
+.br-score:focus{outline:none;border-color:var(--gold)}
+.br-score:not(:placeholder-shown){border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.08);color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.br-connector{display:flex;flex-direction:column;justify-content:space-around;width:16px;flex-shrink:0}
+.br-conn-line{flex:1;border-right:1px solid var(--border);position:relative}
+
+/* champion box */
+.champ-box{background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.03));border:2px solid var(--gold);border-radius:14px;padding:20px 16px;text-align:center;margin-top:16px}
+.champ-trophy{font-size:38px;display:block;margin-bottom:8px}
+.champ-lbl{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:var(--gold);margin-bottom:6px}
+.champ-inp{background:transparent;border:none;border-bottom:2px dashed rgba(201,168,76,0.4);color:#fff;-webkit-text-fill-color:#fff;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;text-align:center;width:100%;max-width:280px;padding:4px 8px;-webkit-appearance:none}
+.champ-inp:focus{outline:none;border-bottom-color:var(--gold)}
+.champ-inp::placeholder{color:rgba(255,255,255,0.12);-webkit-text-fill-color:rgba(255,255,255,0.12)}
+
+/* ── PRODE ── */
+.prode-lobby{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.prode-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+.prode-card h3{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:4px}
+.prode-card p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px}
+.prode-inp{width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;color:#fff;-webkit-text-fill-color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;padding:10px 12px;-webkit-appearance:none;margin-bottom:8px;letter-spacing:0.5px}
+.prode-inp:focus{outline:none;border-color:var(--gold)}
+.prode-inp::placeholder{color:#3D4F6E;-webkit-text-fill-color:#3D4F6E}
+.prode-inp.code{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;text-align:center;text-transform:uppercase}
+.btn{border:none;border-radius:8px;padding:10px 20px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:opacity 0.15s;touch-action:manipulation}
+.btn:active{opacity:0.8}
+.btn-gold{background:var(--gold);color:var(--dark)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.btn-green{background:var(--green);color:#fff}
+.btn-red{background:var(--red);color:#fff}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Prode main UI */
+.prode-header{background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(139,92,246,0.05));border:1px solid rgba(139,92,246,0.3);border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.prode-room-info{font-family:'Barlow Condensed',sans-serif}
+.prode-room-code{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:4px;color:var(--purple);margin-bottom:2px}
+.prode-room-name{font-size:12px;color:var(--muted);letter-spacing:0.5px}
+.prode-my-pts{text-align:right}
+.my-pts-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:1px;line-height:1}
+.my-pts-lbl{font-size:10px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px}
+
+/* Leaderboard */
+.leaderboard{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.lb-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.lb-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--text)}
+.lb-count{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.05);padding:2px 7px;border-radius:8px}
+.lb-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.1s}
+.lb-row:last-child{border-bottom:none}
+.lb-row.me{background:rgba(201,168,76,0.06);border-left:2px solid var(--gold)}
+.lb-pos{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--muted);width:24px;text-align:center;flex-shrink:0}
+.lb-pos.gold{color:#F59E0B}.lb-pos.silver{color:#9CA3AF}.lb-pos.bronze{color:#CD7C2F}
+.lb-name{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
+.lb-pts{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);letter-spacing:0.5px}
+.lb-pts-lbl{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);letter-spacing:0.5px}
+.lb-champ{font-size:9px;font-family:'Barlow Condensed',sans-serif;color:var(--muted);margin-top:1px}
+.lb-champ span{color:var(--gold)}
+
+/* Prode picks */
+.picks-section{margin-bottom:14px}
+.picks-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.picks-subtitle{font-size:11px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.3px;font-weight:400}
+.pick-row{display:grid;grid-template-columns:22px 52px 1fr auto 1fr 60px;align-items:center;gap:5px;padding:6px 10px;background:var(--panel);border:1px solid var(--border);border-radius:8px;margin-bottom:5px}
+.pick-row.locked{opacity:0.7;pointer-events:none}
+.pick-row.correct-exact{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3)}
+.pick-row.correct-result{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.2)}
+.pick-row.wrong{background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.15)}
+.pick-badge{font-size:9px;font-family:'Barlow Condensed',sans-serif;padding:2px 5px;border-radius:4px;white-space:nowrap;letter-spacing:0.3px}
+.pb-exact{background:rgba(16,185,129,0.2);color:#10B981}
+.pb-result{background:rgba(59,130,246,0.2);color:#3B82F6}
+.pb-wrong{background:rgba(239,68,68,0.15);color:#EF4444}
+.pb-pts{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold)}
+.pick-inp{width:28px;height:26px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:5px;color:#fff;-webkit-text-fill-color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;text-align:center;padding:0;-moz-appearance:textfield;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.pick-inp::-webkit-outer-spin-button,.pick-inp::-webkit-inner-spin-button{-webkit-appearance:none}
+.pick-inp:focus{outline:none;border-color:var(--purple);background:rgba(139,92,246,0.1)}
+.pick-inp.filled{border-color:rgba(139,92,246,0.4);color:var(--purple);-webkit-text-fill-color:var(--purple);background:rgba(139,92,246,0.06)}
+
+.champ-pick{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.champ-pick-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--gold);margin-bottom:4px}
+.champ-pick-sub{font-size:11px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;margin-bottom:10px;line-height:1.5}
+.champ-pick-row{display:flex;gap:8px;align-items:center}
+.champ-pick-inp{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;color:#fff;-webkit-text-fill-color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;padding:9px 12px;-webkit-appearance:none;letter-spacing:0.5px}
+.champ-pick-inp:focus{outline:none;border-color:var(--purple)}
+.champ-pick-inp::placeholder{color:#3D4F6E;-webkit-text-fill-color:#3D4F6E}
+.champ-pick-inp.locked{opacity:0.6;pointer-events:none;background:rgba(255,255,255,0.03)}
+
+/* Points scoring info */
+.scoring-info{background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.scoring-info-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.scoring-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:var(--muted);font-family:'Barlow Condensed',sans-serif}
+.scoring-pts{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);min-width:28px;text-align:center}
+
+/* Share box */
+.share-box{background:var(--panel);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:13px;margin-bottom:14px}
+.share-ttl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.share-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+.share-btn{display:inline-block;border-radius:8px;padding:8px 13px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.5px;cursor:pointer;margin-right:6px;margin-bottom:6px;border:1px solid;background:transparent}
+.s-wsp{border-color:#25D366;color:#25D366}
+.s-copy{border-color:var(--gold);color:var(--gold)}
+
+/* ── SAVE BAR ── */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--border);padding:8px 14px;z-index:99;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+.save-bar-in{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prog-wrap{flex:1;display:flex;align-items:center;gap:6px;min-width:60px}
+.prog-bar{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:2px;transition:width 0.3s;width:0%}
+.prog-lbl{font-size:10px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;white-space:nowrap}
+.save-status{font-size:10px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.save-btn{background:var(--gold);color:var(--dark);border:none;border-radius:8px;padding:9px 18px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;flex-shrink:0;touch-action:manipulation}
+.save-btn:active{opacity:0.85;transform:scale(0.97)}
+
+/* ── INSTALL BANNERS ── */
+.inst-b{background:#0A0E1A;border-bottom:1px solid rgba(201,168,76,0.2);padding:7px 13px;display:none;align-items:center;gap:8px;flex-shrink:0}
+.ib-icon{font-size:16px;flex-shrink:0}
+.ib-txt{flex:1;font-size:10px;color:#8899BB;font-family:'Barlow Condensed',sans-serif;line-height:1.4}
+.ib-txt strong{color:var(--gold)}
+.ib-btn{background:var(--gold);color:#0A0E1A;border:none;border-radius:5px;padding:5px 10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0}
+.ib-x{background:none;border:none;color:#4B5563;font-size:16px;cursor:pointer;padding:0 3px;flex-shrink:0}
+
+@media(max-width:420px){
+  .hdr-logo{font-size:16px}.hdr-pills{display:none}.save-status{display:none}
+  .m-venue{display:none}.tc-name{max-width:60px}
+  .m-row{grid-template-columns:18px 44px 1fr auto 1fr}
+  .pick-row{grid-template-columns:18px 44px 1fr auto 1fr}
+}
+
+/* Twemoji flag images */
+.m-flag img, .tc-flag img, .gb-flag img, .gb-flags img {
+  width: 1.2em !important;
+  height: 1.2em !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0 !important;
+}
+.gb-flag img { width: 1.3em !important; height: 1.3em !important; }
+
+</style>
+</head>
+<body>
+
+<div class="inst-b" id="ios-b">
+  <div class="ib-icon">📲</div>
+  <div class="ib-txt">iPhone: <strong>Compartir</strong> → <strong>"Agregar a pantalla de inicio"</strong></div>
+  <button class="ib-x" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+<div class="inst-b" id="and-b">
+  <div class="ib-icon">📲</div>
+  <div class="ib-txt"><strong>Instalá como app</strong> en tu pantalla de inicio</div>
+  <button class="ib-btn" id="inst-btn">Instalar</button>
+  <button class="ib-x" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+
+<div class="hdr">
+  <div class="hdr-in">
+    <div>
+      <div class="hdr-logo">Copa Mundial <span>FIFA 2026</span></div>
+      <div class="hdr-sub">Fixture Interactivo + Prode · Interactive Bracket</div>
+    </div>
+    <div class="hdr-pills">
+      <span class="pill">11 Jun – 19 Jul</span>
+      <span class="pill">48 equipos</span>
+      <span class="pill">104 partidos</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-in">
+    <button class="nav-btn active" onclick="showSec('grupos',this)">
+      <span class="nav-dot" style="background:#3B82F6"></span>Grupos
+    </button>
+    <button class="nav-btn" onclick="showSec('bracket',this)">
+      <span class="nav-dot" style="background:#10B981"></span>Llaves
+    </button>
+    <button class="nav-btn" onclick="showSec('prode',this)">
+      <span class="nav-dot" style="background:#8B5CF6"></span>⚡ Prode
+    </button>
+  </div>
+</div>
+
+<div class="content">
+ <div class="content-in">
+
+  <!-- ══ GRUPOS ══ -->
+  <div id="sec-grupos" class="section active">
+    <div class="sh">
+      <div class="sh-title">Fase de Grupos · Group Stage</div>
+      <span class="sh-date">11 – 27 Jun 2026</span>
+    </div>
+    <div class="groups-wrap" id="groups-wrap"></div>
+  </div>
+
+  <!-- ══ BRACKET ══ -->
+  <div id="sec-bracket" class="section">
+    <div class="sh">
+      <div class="sh-title">Llaves Eliminatorias · Knockout Bracket</div>
+      <span class="sh-date">1 – 19 Jul 2026</span>
+    </div>
+    <div class="bracket-container" id="bracket-container"></div>
+    <div class="champ-box">
+      <span class="champ-trophy">🏆</span>
+      <div class="champ-lbl">Campeón del Mundo · World Champion 2026</div>
+      <div style="height:1px;background:rgba(201,168,76,0.25);margin:6px auto;width:50%"></div>
+      <input class="champ-inp" id="champ" type="text" placeholder="Escribí el campeón..." oninput="st.champion=this.value;save()">
+    </div>
+  </div>
+
+  <!-- ══ PRODE ══ -->
+  <div id="sec-prode" class="section">
+    <!-- Lobby (shown when not in a room) -->
+    <div id="prode-lobby">
+      <div class="sh"><div class="sh-title">⚡ Prode Mundial 2026</div></div>
+
+      <div class="scoring-info">
+        <div class="scoring-info-title">Sistema de puntos</div>
+        <div class="scoring-row"><span class="scoring-pts">3</span>pts · Resultado exacto (ej: Argentina 2-1 Francia)</div>
+        <div class="scoring-row"><span class="scoring-pts">1</span>pt · Acertás victoria o empate (sin resultado exacto)</div>
+        <div class="scoring-row"><span class="scoring-pts">0</span>pts · No acertás nada</div>
+        <div class="scoring-row"><span class="scoring-pts">+6</span>pts · Bonus si acertás el campeón del torneo</div>
+      </div>
+
+      <div class="prode-lobby" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="prode-card">
+          <h3>Crear sala</h3>
+          <p>Creá una sala nueva y compartí el código con tus amigos por WhatsApp.</p>
+          <input class="prode-inp" id="create-name" type="text" placeholder="Tu nombre..." autocomplete="name">
+          <input class="prode-inp" id="room-name-inp" type="text" placeholder="Nombre de la sala (ej: Los pibes)">
+          <button class="btn btn-gold" onclick="createRoom()" style="width:100%">Crear sala</button>
+        </div>
+        <div class="prode-card">
+          <h3>Unirse</h3>
+          <p>Ingresá el código que te mandaron y ponete un nombre para competir.</p>
+          <input class="prode-inp" id="join-name" type="text" placeholder="Tu nombre..." autocomplete="name">
+          <input class="prode-inp code" id="join-code" type="text" placeholder="CÓDIGO" maxlength="6" oninput="this.value=this.value.toUpperCase()">
+          <button class="btn btn-green" onclick="joinRoom()" style="width:100%">Unirme</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main prode UI (shown when in a room) -->
+    <div id="prode-main" style="display:none">
+
+      <div class="prode-header">
+        <div class="prode-room-info">
+          <div class="prode-room-code" id="display-room-code">——</div>
+          <div class="prode-room-name" id="display-room-name">Sala de prode</div>
+          <div style="font-size:10px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;margin-top:2px">Jugando como: <span id="display-my-name" style="color:var(--gold)">—</span></div>
+        </div>
+        <div class="prode-my-pts">
+          <div class="my-pts-num" id="display-my-pts">0</div>
+          <div class="my-pts-lbl">MIS PUNTOS</div>
+        </div>
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="leaderboard">
+        <div class="lb-head">
+          <div class="lb-title">Tabla de posiciones</div>
+          <span class="lb-count" id="lb-count">1 jugador</span>
+          <button class="btn btn-outline" style="margin-left:auto;padding:4px 10px;font-size:10px" onclick="syncLeaderboard()">↻ Actualizar</button>
+        </div>
+        <div id="lb-body"></div>
+      </div>
+
+      <!-- Champion pick -->
+      <div class="champ-pick">
+        <div class="champ-pick-title">🏆 Tu campeón</div>
+        <div class="champ-pick-sub" id="champ-pick-sub">Elegí tu campeón antes de que termine el primer día de partidos (11 Jun). Acertar suma +6 pts bonus.</div>
+        <div class="champ-pick-row">
+          <input class="champ-pick-inp" id="pick-champ-inp" type="text" placeholder="¿Quién va a ser campeón?..." oninput="saveMyPick('champion',this.value)">
+          <button class="btn btn-outline" style="padding:8px 12px;font-size:11px" onclick="saveChampionPick()">Guardar</button>
+        </div>
+      </div>
+
+      <!-- Share -->
+      <div class="share-box">
+        <div class="share-ttl">Invitá amigos al prode</div>
+        <div class="share-desc">Compartí el código <strong id="share-code" style="color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px">——</strong> con tus amigos por WhatsApp para que se unan.</div>
+        <button class="share-btn s-wsp" onclick="shareProde()">WhatsApp</button>
+        <button class="share-btn s-copy" onclick="copyCode()">Copiar código</button>
+        <button class="btn btn-outline" style="padding:6px 12px;font-size:11px;margin-left:4px" onclick="leaveRoom()">Salir de la sala</button>
+      </div>
+
+      <!-- Picks by group -->
+      <div id="picks-container"></div>
+
+    </div>
+  </div>
+
+ </div>
+</div>
+
+<div class="save-bar">
+  <div class="save-bar-in">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+      <span class="prog-lbl" id="prog-lbl">0%</span>
+    </div>
+    <div class="save-status" id="save-status">Auto-guardado activo</div>
+    <button class="save-btn" onclick="save(true)">💾 Guardar</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA — All 72 group matches + knockouts
+═══════════════════════════════════════ */
+const GROUPS=[
+  {l:'A',c:'#EF4444',
+   teams:[{n:'México',f:'🇲🇽'},{n:'Sudáfrica',f:'🇿🇦'},{n:'Corea del Sur',f:'🇰🇷'},{n:'Rep. Checa',f:'🇨🇿'}],
+   matches:[
+     {id:'A1',n:'P.1', d:'11 Jun',h:'16:00',v:'Azteca, CDMX',    a:0,b:1},
+     {id:'A2',n:'P.2', d:'11 Jun',h:'23:00',v:'Guadalajara',     a:2,b:3},
+     {id:'A3',n:'P.3', d:'15 Jun',h:'22:00',v:'Guadalajara',     a:0,b:2},
+     {id:'A4',n:'P.4', d:'18 Jun',h:'15:00',v:'Atlanta',         a:3,b:1},
+     {id:'A5',n:'P.5', d:'24 Jun',h:'22:00',v:'Azteca, CDMX',   a:0,b:3},
+     {id:'A6',n:'P.6', d:'24 Jun',h:'22:00',v:'Monterrey',       a:1,b:2},
+   ]},
+  {l:'B',c:'#F97316',
+   teams:[{n:'Canadá',f:'🇨🇦'},{n:'Bosnia y Herz.',f:'🇧🇦'},{n:'Qatar',f:'🇶🇦'},{n:'Suiza',f:'🇨🇭'}],
+   matches:[
+     {id:'B1',n:'P.7', d:'12 Jun',h:'15:00',v:'Toronto',         a:0,b:1},
+     {id:'B2',n:'P.8', d:'12 Jun',h:'22:00',v:'Los Ángeles',     a:2,b:3},
+     {id:'B3',n:'P.9', d:'17 Jun',h:'01:00',v:'Vancouver',       a:0,b:2},
+     {id:'B4',n:'P.10',d:'18 Jun',h:'18:00',v:'Los Ángeles',     a:3,b:1},
+     {id:'B5',n:'P.11',d:'22 Jun',h:'22:00',v:'Toronto',         a:0,b:3},
+     {id:'B6',n:'P.12',d:'22 Jun',h:'22:00',v:'Kansas City',     a:1,b:2},
+   ]},
+  {l:'C',c:'#EAB308',
+   teams:[{n:'Brasil',f:'🇧🇷'},{n:'Marruecos',f:'🇲🇦'},{n:'Haití',f:'🇭🇹'},{n:'Escocia',f:'🏴󠁧󠁢󠁳󠁣󠁴󠁿'}],
+   matches:[
+     {id:'C1',n:'P.13',d:'13 Jun',h:'22:00',v:'Nueva York',      a:0,b:1},
+     {id:'C2',n:'P.14',d:'13 Jun',h:'01:00',v:'Boston',          a:2,b:3},
+     {id:'C3',n:'P.15',d:'17 Jun',h:'20:00',v:'Houston',         a:0,b:3},
+     {id:'C4',n:'P.16',d:'17 Jun',h:'22:00',v:'Atlanta',         a:1,b:2},
+     {id:'C5',n:'P.17',d:'22 Jun',h:'22:00',v:'Dallas',          a:0,b:2},
+     {id:'C6',n:'P.18',d:'22 Jun',h:'22:00',v:'Dallas',          a:3,b:1},
+   ]},
+  {l:'D',c:'#22C55E',
+   teams:[{n:'EE.UU.',f:'🇺🇸'},{n:'Paraguay',f:'🇵🇾'},{n:'Australia',f:'🇦🇺'},{n:'Turquía',f:'🇹🇷'}],
+   matches:[
+     {id:'D1',n:'P.19',d:'12 Jun',h:'22:00',v:'SoFi, L.A.',      a:0,b:1},
+     {id:'D2',n:'P.20',d:'13 Jun',h:'01:00',v:'Vancouver',       a:2,b:3},
+     {id:'D3',n:'P.21',d:'17 Jun',h:'01:00',v:'Dallas',          a:0,b:2},
+     {id:'D4',n:'P.22',d:'19 Jun',h:'01:00',v:'San Francisco',   a:1,b:3},
+     {id:'D5',n:'P.23',d:'21 Jun',h:'22:00',v:'SoFi, L.A.',      a:0,b:3},
+     {id:'D6',n:'P.24',d:'21 Jun',h:'22:00',v:'Dallas',          a:1,b:2},
+   ]},
+  {l:'E',c:'#14B8A6',
+   teams:[{n:'Alemania',f:'🇩🇪'},{n:'Curazao',f:'🇨🇼'},{n:'Costa de Marfil',f:'🇨🇮'},{n:'Ecuador',f:'🇪🇨'}],
+   matches:[
+     {id:'E1',n:'P.25',d:'13 Jun',h:'22:00',v:'Filadelfia',      a:0,b:1},
+     {id:'E2',n:'P.26',d:'14 Jun',h:'01:00',v:'Filadelfia',      a:2,b:3},
+     {id:'E3',n:'P.27',d:'18 Jun',h:'19:00',v:'Dallas',          a:0,b:2},
+     {id:'E4',n:'P.28',d:'19 Jun',h:'01:00',v:'Nueva York',      a:1,b:3},
+     {id:'E5',n:'P.29',d:'23 Jun',h:'22:00',v:'Filadelfia',      a:0,b:3},
+     {id:'E6',n:'P.30',d:'23 Jun',h:'22:00',v:'Houston',         a:1,b:2},
+   ]},
+  {l:'F',c:'#3B82F6',
+   teams:[{n:'Países Bajos',f:'🇳🇱'},{n:'Japón',f:'🇯🇵'},{n:'Suecia',f:'🇸🇪'},{n:'Túnez',f:'🇹🇳'}],
+   matches:[
+     {id:'F1',n:'P.31',d:'14 Jun',h:'19:00',v:'Seattle',         a:0,b:1},
+     {id:'F2',n:'P.32',d:'14 Jun',h:'01:00',v:'Monterrey',       a:2,b:3},
+     {id:'F3',n:'P.33',d:'18 Jun',h:'22:00',v:'Miami',           a:0,b:2},
+     {id:'F4',n:'P.34',d:'19 Jun',h:'01:00',v:'Monterrey',       a:1,b:3},
+     {id:'F5',n:'P.35',d:'23 Jun',h:'22:00',v:'Seattle',         a:0,b:3},
+     {id:'F6',n:'P.36',d:'23 Jun',h:'22:00',v:'Dallas',          a:1,b:2},
+   ]},
+  {l:'G',c:'#8B5CF6',
+   teams:[{n:'Bélgica',f:'🇧🇪'},{n:'Egipto',f:'🇪🇬'},{n:'Irán',f:'🇮🇷'},{n:'Nueva Zelanda',f:'🇳🇿'}],
+   matches:[
+     {id:'G1',n:'P.37',d:'15 Jun',h:'19:00',v:'Atlanta',         a:0,b:1},
+     {id:'G2',n:'P.38',d:'15 Jun',h:'01:00',v:'Kansas City',     a:2,b:3},
+     {id:'G3',n:'P.39',d:'19 Jun',h:'19:00',v:'Boston',          a:0,b:2},
+     {id:'G4',n:'P.40',d:'20 Jun',h:'01:00',v:'Seattle',         a:1,b:3},
+     {id:'G5',n:'P.41',d:'24 Jun',h:'22:00',v:'Nueva York',      a:0,b:3},
+     {id:'G6',n:'P.42',d:'24 Jun',h:'22:00',v:'Miami',           a:1,b:2},
+   ]},
+  {l:'H',c:'#EC4899',
+   teams:[{n:'España',f:'🇪🇸'},{n:'Cabo Verde',f:'🇨🇻'},{n:'Arabia Saudita',f:'🇸🇦'},{n:'Uruguay',f:'🇺🇾'}],
+   matches:[
+     {id:'H1',n:'P.43',d:'15 Jun',h:'12:00',v:'Atlanta',         a:0,b:1},
+     {id:'H2',n:'P.44',d:'16 Jun',h:'01:00',v:'Dallas',          a:2,b:3},
+     {id:'H3',n:'P.45',d:'20 Jun',h:'19:00',v:'Kansas City',     a:0,b:2},
+     {id:'H4',n:'P.46',d:'20 Jun',h:'22:00',v:'Miami',           a:1,b:3},
+     {id:'H5',n:'P.47',d:'25 Jun',h:'22:00',v:'Dallas',          a:0,b:3},
+     {id:'H6',n:'P.48',d:'25 Jun',h:'22:00',v:'Houston',         a:1,b:2},
+   ]},
+  {l:'I',c:'#06B6D4',
+   teams:[{n:'Francia',f:'🇫🇷'},{n:'Senegal',f:'🇸🇳'},{n:'Irak',f:'🇮🇶'},{n:'Noruega',f:'🇳🇴'}],
+   matches:[
+     {id:'I1',n:'P.49',d:'16 Jun',h:'19:00',v:'Nueva York',      a:0,b:1},
+     {id:'I2',n:'P.50',d:'16 Jun',h:'22:00',v:'Boston',          a:2,b:3},
+     {id:'I3',n:'P.51',d:'20 Jun',h:'22:00',v:'Houston',         a:0,b:2},
+     {id:'I4',n:'P.52',d:'21 Jun',h:'01:00',v:'Nueva York',      a:1,b:3},
+     {id:'I5',n:'P.53',d:'25 Jun',h:'22:00',v:'Dallas',          a:0,b:3},
+     {id:'I6',n:'P.54',d:'25 Jun',h:'22:00',v:'Filadelfia',      a:1,b:2},
+   ]},
+  {l:'J',c:'#10B981',
+   teams:[{n:'Argentina',f:'🇦🇷'},{n:'Argelia',f:'🇩🇿'},{n:'Austria',f:'🇦🇹'},{n:'Jordania',f:'🇯🇴'}],
+   matches:[
+     {id:'J1',n:'P.55',d:'16 Jun',h:'22:00',v:'Kansas City',     a:0,b:1},
+     {id:'J2',n:'P.56',d:'17 Jun',h:'01:00',v:'San Francisco',   a:2,b:3},
+     {id:'J3',n:'P.57',d:'21 Jun',h:'22:00',v:'Dallas',          a:0,b:2},
+     {id:'J4',n:'P.58',d:'22 Jun',h:'01:00',v:'San Francisco',   a:1,b:3},
+     {id:'J5',n:'P.59',d:'26 Jun',h:'22:00',v:'Kansas City',     a:0,b:3},
+     {id:'J6',n:'P.60',d:'26 Jun',h:'22:00',v:'Dallas',          a:1,b:2},
+   ]},
+  {l:'K',c:'#F43F5E',
+   teams:[{n:'Portugal',f:'🇵🇹'},{n:'Congo RD',f:'🇨🇩'},{n:'Uzbekistán',f:'🇺🇿'},{n:'Colombia',f:'🇨🇴'}],
+   matches:[
+     {id:'K1',n:'P.61',d:'17 Jun',h:'19:00',v:'Boston',          a:0,b:1},
+     {id:'K2',n:'P.62',d:'17 Jun',h:'22:00',v:'Azteca, CDMX',   a:2,b:3},
+     {id:'K3',n:'P.63',d:'21 Jun',h:'19:00',v:'Houston',         a:0,b:2},
+     {id:'K4',n:'P.64',d:'22 Jun',h:'01:00',v:'Filadelfia',      a:1,b:3},
+     {id:'K5',n:'P.65',d:'26 Jun',h:'22:00',v:'Nueva York',      a:0,b:3},
+     {id:'K6',n:'P.66',d:'26 Jun',h:'22:00',v:'Seattle',         a:1,b:2},
+   ]},
+  {l:'L',c:'#A855F7',
+   teams:[{n:'Inglaterra',f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿'},{n:'Croacia',f:'🇭🇷'},{n:'Ghana',f:'🇬🇭'},{n:'Panamá',f:'🇵🇦'}],
+   matches:[
+     {id:'L1',n:'P.67',d:'18 Jun',h:'22:00',v:'Miami',           a:0,b:1},
+     {id:'L2',n:'P.68',d:'19 Jun',h:'01:00',v:'Atlanta',         a:2,b:3},
+     {id:'L3',n:'P.69',d:'22 Jun',h:'19:00',v:'Houston',         a:0,b:2},
+     {id:'L4',n:'P.70',d:'23 Jun',h:'01:00',v:'Seattle',         a:1,b:3},
+     {id:'L5',n:'P.71',d:'26 Jun',h:'22:00',v:'Filadelfia',      a:0,b:3},
+     {id:'L6',n:'P.72',d:'26 Jun',h:'22:00',v:'Miami',           a:1,b:2},
+   ]},
+];
+
+const ALL_MATCHES=GROUPS.flatMap(g=>g.matches.map(m=>({...m,gl:g.l,ta:g.teams[m.a],tb:g.teams[m.b]})));
+
+const KO_ROUNDS=[
+  {id:'r32',name:'16avos',date:'1-4 Jul',color:'#10B981',matches:[
+    {n:73,d:'1 Jul',v:'Foxborough',a:'1A',b:'3°'},{n:74,d:'1 Jul',v:'Vancouver',a:'1B',b:'3°'},
+    {n:75,d:'2 Jul',v:'Houston',a:'1C',b:'3°'},{n:76,d:'2 Jul',v:'Miami',a:'1D',b:'2C'},
+    {n:77,d:'2 Jul',v:'Dallas',a:'1E',b:'2D'},{n:78,d:'3 Jul',v:'Monterrey',a:'1F',b:'2E'},
+    {n:79,d:'3 Jul',v:'Atlanta',a:'1G',b:'2F'},{n:80,d:'3 Jul',v:'Guadalajara',a:'1H',b:'3°'},
+    {n:81,d:'4 Jul',v:'Kansas City',a:'1I',b:'2J'},{n:82,d:'4 Jul',v:'Filadelfia',a:'1J',b:'2I'},
+    {n:83,d:'4 Jul',v:'Los Ángeles',a:'1K',b:'2L'},{n:84,d:'4 Jul',v:'Toronto',a:'1L',b:'2K'},
+    {n:85,d:'4 Jul',v:'San Francisco',a:'2A',b:'2B'},{n:86,d:'4 Jul',v:'Boston',a:'2G',b:'2H'},
+    {n:87,d:'4 Jul',v:'Nueva York',a:'3°',b:'3°'},{n:88,d:'4 Jul',v:'Dallas',a:'3°',b:'3°'},
+  ]},
+  {id:'r16',name:'Octavos',date:'5-8 Jul',color:'#F59E0B',matches:[
+    {n:89,d:'5 Jul',v:'Houston',a:'W73',b:'W75'},{n:90,d:'5 Jul',v:'Filadelfia',a:'W74',b:'W77'},
+    {n:91,d:'6 Jul',v:'Nueva York',a:'W76',b:'W78'},{n:92,d:'6 Jul',v:'Dallas',a:'W79',b:'W80'},
+    {n:93,d:'7 Jul',v:'Los Ángeles',a:'W81',b:'W85'},{n:94,d:'7 Jul',v:'Miami',a:'W86',b:'W87'},
+    {n:95,d:'8 Jul',v:'Seattle',a:'W82',b:'W88'},{n:96,d:'8 Jul',v:'Atlanta',a:'W83',b:'W84'},
+  ]},
+  {id:'qf',name:'Cuartos',date:'9-11 Jul',color:'#EF4444',matches:[
+    {n:97,d:'9 Jul',v:'Dallas',a:'W89',b:'W90'},{n:98,d:'9 Jul',v:'Los Ángeles',a:'W91',b:'W92'},
+    {n:99,d:'11 Jul',v:'Nueva York',a:'W93',b:'W94'},{n:100,d:'11 Jul',v:'Boston',a:'W95',b:'W96'},
+  ]},
+  {id:'sf',name:'Semis',date:'14-15 Jul',color:'#8B5CF6',matches:[
+    {n:101,d:'14 Jul',v:'Dallas/Arlington',a:'W97',b:'W98'},
+    {n:102,d:'15 Jul',v:'MetLife, NJ',a:'W99',b:'W100'},
+  ]},
+  {id:'tp',name:'3er Lugar',date:'18 Jul',color:'#14B8A6',matches:[
+    {n:103,d:'18 Jul',v:'Miami',a:'Perdedor SF1',b:'Perdedor SF2',lbl:'3er Lugar'},
+  ]},
+  {id:'fin',name:'Final',date:'19 Jul',color:'#F59E0B',matches:[
+    {n:104,d:'19 Jul',v:'MetLife, NJ',a:'Finalista A',b:'Finalista B',lbl:'FINAL ⭐',isFinal:true},
+  ]},
+];
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let st={};
+function loadSt(){try{const s=localStorage.getItem('mundial2026v4');if(s)st=JSON.parse(s);}catch(e){}}
+function save(fb){
+  try{localStorage.setItem('mundial2026v4',JSON.stringify(st));}catch(e){}
+  updateProg();
+  if(fb){
+    const el=document.getElementById('save-status');
+    el.textContent='✅ Guardado · '+new Date().toLocaleTimeString();
+    setTimeout(()=>el.textContent='Auto-guardado activo',2500);
+  }
+}
+
+function updateProg(){
+  const filled=ALL_MATCHES.filter(m=>{const s=st['m_'+m.id]||{};return s.ga!==undefined&&s.ga!==''&&s.gb!==undefined&&s.gb!==''}).length;
+  const pct=Math.round(filled/ALL_MATCHES.length*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-lbl').textContent=pct+'%';
+}
+
+function showSec(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.content').scrollTop=0;
+}
+
+/* ═══════════════════════════════════════
+   STANDINGS CALC
+═══════════════════════════════════════ */
+function calcStandings(g){
+  const stats=g.teams.map((t,i)=>({i,name:t.n,flag:t.f,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0}));
+  g.matches.forEach(m=>{
+    const ms=st['m_'+m.id]||{};
+    const ga=parseInt(ms.ga),gb=parseInt(ms.gb);
+    if(isNaN(ga)||isNaN(gb)||ms.ga===''||ms.gb==='')return;
+    const ia=m.a,ib=m.b;
+    stats[ia].pj++;stats[ib].pj++;
+    stats[ia].gf+=ga;stats[ia].gc+=gb;
+    stats[ib].gf+=gb;stats[ib].gc+=ga;
+    if(ga>gb){stats[ia].pg++;stats[ia].pts+=3;stats[ib].pp++;}
+    else if(ga<gb){stats[ib].pg++;stats[ib].pts+=3;stats[ia].pp++;}
+    else{stats[ia].pe++;stats[ia].pts++;stats[ib].pe++;stats[ib].pts++;}
+  });
+  stats.forEach(s=>s.dg=s.gf-s.gc);
+  return stats.sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf);
+}
+
+/* ═══════════════════════════════════════
+   RENDER GROUPS
+═══════════════════════════════════════ */
+function renderGroups(){
+  const wrap=document.getElementById('groups-wrap');
+  GROUPS.forEach(g=>{
+    const block=document.createElement('div');
+    block.className='group-block';block.id='gb-'+g.l;
+    wrap.appendChild(block);
+    refreshGroup(g.l);
+  });
+}
+
+function refreshGroup(gl){
+  const g=GROUPS.find(x=>x.l===gl);
+  const block=document.getElementById('gb-'+gl);if(!block)return;
+  const stats=calcStandings(g);
+
+  const mHTML=g.matches.map(m=>{
+    const ta=g.teams[m.a],tb=g.teams[m.b];
+    const ms=st['m_'+m.id]||{};
+    const played=ms.ga!==undefined&&ms.ga!==''&&ms.gb!==undefined&&ms.gb!=='';
+    return `<div class="m-row${played?' played':''}">
+      <span class="m-num">${m.n}</span>
+      <span class="m-time">${m.d}<br><span style="color:#4A6080">${m.h}</span></span>
+      <div class="m-team">
+        <span class="m-flag">${ta.f}</span>
+        <span class="m-name">${ta.n}</span>
+      </div>
+      <div class="m-score">
+        <input class="s-inp${ms.ga!==undefined&&ms.ga!==''?' filled':''}" type="number" min="0" max="30" value="${ms.ga!==undefined&&ms.ga!==''?ms.ga:''}" placeholder="—" oninput="setScore('${m.id}','ga',this.value,'${gl}')">
+        <span class="s-dash">:</span>
+        <input class="s-inp${ms.gb!==undefined&&ms.gb!==''?' filled':''}" type="number" min="0" max="30" value="${ms.gb!==undefined&&ms.gb!==''?ms.gb:''}" placeholder="—" oninput="setScore('${m.id}','gb',this.value,'${gl}')">
+      </div>
+      <div class="m-team right">
+        <span class="m-flag">${tb.f}</span>
+        <span class="m-name">${tb.n}</span>
+      </div>
+      <span class="m-venue">${m.v}</span>
+    </div>`;
+  }).join('');
+
+  const sHTML=stats.map((s,rank)=>{
+    const pc=rank===0?'p1':rank===1?'p2':rank===2?'p3':'p4';
+    const rc=rank<2?'cl':rank===2?'po':'';
+    const dg=s.dg>0?'+'+s.dg:s.dg===0?'0':''+s.dg;
+    const dgC=s.dg>0?'dg-p':s.dg<0?'dg-n':'dg-z';
+    return `<tr class="${rc}">
+      <td><span class="pos-b ${pc}">${rank+1}</span></td>
+      <td class="left"><div class="t-cell"><span class="tc-flag">${s.flag}</span><span class="tc-name">${s.name}</span></div></td>
+      <td><span class="pts-c" style="color:${g.c}">${s.pts}</span></td>
+      <td>${s.pj}</td>
+      <td style="font-size:11px">${s.pj>0?s.gf+':'+s.gc:'—'}</td>
+      <td class="${dgC}" style="font-size:11px">${s.pj>0?dg:'—'}</td>
+      <td>${s.pg}</td><td>${s.pe}</td><td>${s.pp}</td>
+    </tr>`;
+  }).join('');
+
+  block.innerHTML=`
+    <div class="gb-head" style="background:${g.c}15;border-bottom-color:${g.c}30">
+      <div><span class="gb-letter" style="color:${g.c}">GRUPO ${g.l}</span><span class="gb-sub"> · GROUP ${g.l}</span></div>
+      <div class="gb-flags">${g.teams.map(t=>`<span class="gb-flag">${t.f}</span>`).join('')}</div>
+    </div>
+    <div class="gb-matches">${mHTML}</div>
+    <div class="gb-table-wrap">
+      <table class="std">
+        <thead><tr>
+          <th style="width:22px">#</th><th class="left">Equipo</th>
+          <th title="Puntos">PTS</th><th title="Partidos Jugados">J</th>
+          <th title="Goles">Gol</th><th title="Diferencia">+/-</th>
+          <th title="Ganados">G</th><th title="Empatados">E</th><th title="Perdidos">P</th>
+        </tr></thead>
+        <tbody>${sHTML}</tbody>
+      </table>
+    </div>
+    <div class="gb-legend">
+      <div class="leg"><div class="leg-dot" style="background:#10B981"></div>Clasifica 16avos</div>
+      <div class="leg"><div class="leg-dot" style="background:#3B82F6"></div>Posible clasificado</div>
+    </div>`;
+}
+
+function setScore(mid,side,val,gl){
+  if(!st['m_'+mid])st['m_'+mid]={};
+  st['m_'+mid][side]=val;
+  refreshGroup(gl);
+  if(prode.roomCode)calcAndSyncMyPoints();
+  save(false);
+}
+
+/* ═══════════════════════════════════════
+   RENDER BRACKET
+═══════════════════════════════════════ */
+function renderBracket(){
+  const container=document.getElementById('bracket-container');
+  const tree=document.createElement('div');
+  tree.className='bracket-tree';
+
+  KO_ROUNDS.forEach(rd=>{
+    const round=document.createElement('div');
+    round.className='br-round';
+    round.style.minWidth=rd.matches.length>8?'188px':'188px';
+
+    const title=document.createElement('div');
+    title.className='br-round-title';
+    title.style.background=rd.color;
+    title.textContent=rd.name+' · '+rd.date;
+    round.appendChild(title);
+
+    const matchesWrap=document.createElement('div');
+    matchesWrap.className='br-matches';
+
+    rd.matches.forEach(m=>{
+      const k='ko'+m.n;const s=st[k]||{};
+      const card=document.createElement('div');
+      card.className='br-match'+(m.isFinal?' champion':'');
+      card.innerHTML=`
+        <div class="br-top-bar">
+          <span class="br-mnum">${m.lbl||'P.'+m.n}</span>
+          <div style="text-align:right">
+            <div class="br-mdate" style="color:${rd.color}">${m.d}</div>
+            <div class="br-venue">${m.v}</div>
+          </div>
+        </div>
+        <div class="br-slot top">
+          <span class="br-seed" style="color:${rd.color}">${m.a}</span>
+          <div class="br-team"><input type="text" placeholder="Equipo..." value="${s.ta||''}" oninput="uko(${m.n},'ta',this.value)"></div>
+          <input class="br-score" type="number" min="0" max="20" placeholder="—" value="${s.sa||''}" oninput="uko(${m.n},'sa',this.value)">
+        </div>
+        <div class="br-slot">
+          <span class="br-seed" style="color:${rd.color}">${m.b}</span>
+          <div class="br-team"><input type="text" placeholder="Equipo..." value="${s.tb||''}" oninput="uko(${m.n},'tb',this.value)"></div>
+          <input class="br-score" type="number" min="0" max="20" placeholder="—" value="${s.sb||''}" oninput="uko(${m.n},'sb',this.value)">
+        </div>`;
+      matchesWrap.appendChild(card);
+    });
+
+    round.appendChild(matchesWrap);
+    tree.appendChild(round);
+  });
+
+  container.appendChild(tree);
+}
+
+function uko(n,f,v){const k='ko'+n;if(!st[k])st[k]={};st[k][f]=v;save(false);}
+
+/* ═══════════════════════════════════════
+   PRODE SYSTEM
+   Uses localStorage with room codes as keys
+   Shared data: roomCode → {name, players:{name→{picks,champion,pts}}}
+═══════════════════════════════════════ */
+const prode={roomCode:null,myName:null,roomName:null};
+const PRODE_PREFIX='prode_room_';
+
+function genCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  return Array.from({length:6},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+}
+
+function getRoomData(code){
+  try{const d=localStorage.getItem(PRODE_PREFIX+code);return d?JSON.parse(d):null;}catch(e){return null;}
+}
+function setRoomData(code,data){
+  try{localStorage.setItem(PRODE_PREFIX+code,JSON.stringify(data));}catch(e){}
+}
+
+function createRoom(){
+  const name=document.getElementById('create-name').value.trim();
+  const roomName=document.getElementById('room-name-inp').value.trim()||'Prode Mundial 2026';
+  if(!name){alert('Ingresá tu nombre');return;}
+  const code=genCode();
+  const data={name:roomName,created:Date.now(),players:{}};
+  data.players[name]={picks:{},champion:'',pts:0,joined:Date.now()};
+  setRoomData(code,data);
+  prode.roomCode=code;prode.myName=name;prode.roomName=roomName;
+  st.prode={roomCode:code,myName:name,roomName};save(false);
+  enterRoom();
+}
+
+function joinRoom(){
+  const name=document.getElementById('join-name').value.trim();
+  const code=document.getElementById('join-code').value.trim().toUpperCase();
+  if(!name){alert('Ingresá tu nombre');return;}
+  if(code.length!==6){alert('El código debe tener 6 caracteres');return;}
+  let data=getRoomData(code);
+  if(!data){alert('Sala no encontrada. Verificá el código.');return;}
+  if(!data.players[name])data.players[name]={picks:{},champion:'',pts:0,joined:Date.now()};
+  setRoomData(code,data);
+  prode.roomCode=code;prode.myName=name;prode.roomName=data.name;
+  st.prode={roomCode:code,myName:name,roomName:data.name};save(false);
+  enterRoom();
+}
+
+function enterRoom(){
+  document.getElementById('prode-lobby').style.display='none';
+  document.getElementById('prode-main').style.display='block';
+  document.getElementById('display-room-code').textContent=prode.roomCode;
+  document.getElementById('display-room-name').textContent=prode.roomName;
+  document.getElementById('display-my-name').textContent=prode.myName;
+  document.getElementById('share-code').textContent=prode.roomCode;
+  const data=getRoomData(prode.roomCode);
+  const myData=data&&data.players[prode.myName];
+  if(myData&&myData.champion){document.getElementById('pick-champ-inp').value=myData.champion;}
+  renderPicks();
+  syncLeaderboard();
+}
+
+function leaveRoom(){
+  prode.roomCode=null;prode.myName=null;prode.roomName=null;
+  delete st.prode;save(false);
+  document.getElementById('prode-lobby').style.display='block';
+  document.getElementById('prode-main').style.display='none';
+}
+
+function saveMyPick(mid,val){
+  if(!prode.roomCode||!prode.myName)return;
+  const data=getRoomData(prode.roomCode);if(!data)return;
+  if(!data.players[prode.myName])data.players[prode.myName]={picks:{},champion:'',pts:0,joined:Date.now()};
+  if(mid==='champion'){data.players[prode.myName].champion=val;}
+  else{data.players[prode.myName].picks[mid]=val;}
+  setRoomData(prode.roomCode,data);
+}
+
+function saveChampionPick(){
+  const val=document.getElementById('pick-champ-inp').value.trim();
+  if(!val){alert('Ingresá tu campeón');return;}
+  saveMyPick('champion',val);
+  const btn=event.target;btn.textContent='¡Guardado! ✓';btn.style.background='#10B981';btn.style.color='#fff';
+  setTimeout(()=>{btn.textContent='Guardar';btn.style.background='';btn.style.color='';},2000);
+}
+
+/* Score a single match pick vs actual result */
+function scoreMatch(pickA,pickB,realA,realB){
+  const pa=parseInt(pickA),pb=parseInt(pickB);
+  const ra=parseInt(realA),rb=parseInt(realB);
+  if(isNaN(pa)||isNaN(pb)||isNaN(ra)||isNaN(rb))return null;
+  if(pa===ra&&pb===rb)return{pts:3,type:'exact'};
+  const pickWinner=pa>pb?'a':pa<pb?'b':'draw';
+  const realWinner=ra>rb?'a':ra<rb?'b':'draw';
+  if(pickWinner===realWinner)return{pts:1,type:'result'};
+  return{pts:0,type:'wrong'};
+}
+
+function calcMyPoints(){
+  if(!prode.roomCode||!prode.myName)return 0;
+  const data=getRoomData(prode.roomCode);if(!data)return 0;
+  const myData=data.players[prode.myName];if(!myData)return 0;
+  let total=0;
+  ALL_MATCHES.forEach(m=>{
+    const real=st['m_'+m.id]||{};
+    if(real.ga===undefined||real.ga===''||real.gb===undefined||real.gb==='')return;
+    const pick=myData.picks[m.id];
+    if(!pick||pick.a===undefined||pick.a===''||pick.b===undefined||pick.b==='')return;
+    const score=scoreMatch(pick.a,pick.b,real.ga,real.gb);
+    if(score)total+=score.pts;
+  });
+  // Champion bonus
+  if(myData.champion&&st.champion&&myData.champion.toLowerCase().trim()===st.champion.toLowerCase().trim())total+=6;
+  return total;
+}
+
+function calcAndSyncMyPoints(){
+  if(!prode.roomCode||!prode.myName)return;
+  const pts=calcMyPoints();
+  const data=getRoomData(prode.roomCode);if(!data)return;
+  if(!data.players[prode.myName])return;
+  data.players[prode.myName].pts=pts;
+  setRoomData(prode.roomCode,data);
+  document.getElementById('display-my-pts').textContent=pts;
+}
+
+function syncLeaderboard(){
+  if(!prode.roomCode)return;
+  calcAndSyncMyPoints();
+  const data=getRoomData(prode.roomCode);if(!data)return;
+  const players=Object.entries(data.players)
+    .map(([name,d])=>({name,pts:d.pts||0,champion:d.champion||''}))
+    .sort((a,b)=>b.pts-a.pts);
+  document.getElementById('lb-count').textContent=players.length+' jugador'+(players.length!==1?'es':'');
+  const body=document.getElementById('lb-body');
+  body.innerHTML=players.map((p,i)=>{
+    const posC=i===0?'gold':i===1?'silver':i===2?'bronze':'';
+    const isMe=p.name===prode.myName;
+    return `<div class="lb-row${isMe?' me':''}">
+      <div class="lb-pos ${posC}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</div>
+      <div>
+        <div class="lb-name">${p.name}${isMe?' 👈':''}</div>
+        ${p.champion?`<div class="lb-champ">Campeón: <span>${p.champion}</span></div>`:''}
+      </div>
+      <div style="text-align:right">
+        <div class="lb-pts">${p.pts}</div>
+        <div class="lb-pts-lbl">PTS</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderPicks(){
+  const container=document.getElementById('picks-container');
+  container.innerHTML='';
+  const data=getRoomData(prode.roomCode);
+  const myData=data&&data.players[prode.myName];
+
+  GROUPS.forEach(g=>{
+    const section=document.createElement('div');
+    section.className='picks-section';
+    section.innerHTML=`<div class="picks-title" style="color:${g.c}">GRUPO ${g.l} <span class="picks-subtitle">· Ingresá tus predicciones antes de cada partido</span></div>`;
+
+    g.matches.forEach(m=>{
+      const ta=g.teams[m.a],tb=g.teams[m.b];
+      const real=st['m_'+m.id]||{};
+      const hasReal=real.ga!==undefined&&real.ga!==''&&real.gb!==undefined&&real.gb!=='';
+      const myPick=(myData&&myData.picks[m.id])||{};
+      let rowCls='pick-row';let badge='';
+      if(hasReal&&myPick.a!==undefined&&myPick.a!==''&&myPick.b!==undefined&&myPick.b!==''){
+        const sc=scoreMatch(myPick.a,myPick.b,real.ga,real.gb);
+        if(sc){
+          if(sc.type==='exact'){rowCls+=' correct-exact';badge=`<span class="pick-badge pb-exact">✓ Exacto +3</span>`;}
+          else if(sc.type==='result'){rowCls+=' correct-result';badge=`<span class="pick-badge pb-result">~ Resultado +1</span>`;}
+          else{rowCls+=' wrong';badge=`<span class="pick-badge pb-wrong">✗ Fallaste</span>`;}
+        }
+      }
+      const locked=hasReal?'locked':'';
+      const row=document.createElement('div');
+      row.className=rowCls;
+      row.innerHTML=`
+        <span class="m-num">${m.n}</span>
+        <span class="m-time">${m.d}<br><span style="color:#4A6080">${m.h}</span></span>
+        <div class="m-team">
+          <span class="m-flag">${ta.f}</span>
+          <span class="m-name">${ta.n}</span>
+        </div>
+        <div class="m-score">
+          <input class="pick-inp${myPick.a!==undefined&&myPick.a!==''?' filled':''} ${locked}" type="number" min="0" max="30" value="${myPick.a!==undefined&&myPick.a!==''?myPick.a:''}" placeholder="—" oninput="setPick('${m.id}','a',this.value)" ${locked?'disabled':''}>
+          <span class="s-dash">:</span>
+          <input class="pick-inp${myPick.b!==undefined&&myPick.b!==''?' filled':''} ${locked}" type="number" min="0" max="30" value="${myPick.b!==undefined&&myPick.b!==''?myPick.b:''}" placeholder="—" oninput="setPick('${m.id}','b',this.value)" ${locked?'disabled':''}>
+        </div>
+        <div class="m-team right">
+          <span class="m-flag">${tb.f}</span>
+          <span class="m-name">${tb.n}</span>
+        </div>
+        <div style="text-align:right;min-width:60px">${badge}${hasReal?`<div style="font-size:9px;color:#3D4F6E;font-family:'Barlow Condensed',sans-serif;margin-top:2px">Real: ${real.ga}:${real.gb}</div>`:''}</div>`;
+      section.appendChild(row);
+    });
+    container.appendChild(section);
+  });
+}
+
+function setPick(mid,side,val){
+  saveMyPick(mid,{...((getRoomData(prode.roomCode)?.players[prode.myName]?.picks[mid])||{}), [side]:val});
+  // re-save with correct structure
+  const data=getRoomData(prode.roomCode);if(!data)return;
+  if(!data.players[prode.myName].picks[mid])data.players[prode.myName].picks[mid]={};
+  data.players[prode.myName].picks[mid][side]=val;
+  setRoomData(prode.roomCode,data);
+  calcAndSyncMyPoints();
+  // refresh pick row styling
+  renderPicks();
+}
+
+function shareProde(){
+  const code=prode.roomCode;
+  const url=window.location.href;
+  const txt=`⚽ *PRODE MUNDIAL 2026* 🏆\n\nUnite a mi sala de prode!\n\nCódigo: *${code}*\n\n1. Abrí el link: ${url}\n2. Tocá "Prode"\n3. Ingresá tu nombre y el código *${code}*\n4. ¡Predecí los resultados y competí!\n\nSistema de puntos:\n🎯 Resultado exacto = 3 pts\n✅ Victoria/empate = 1 pt\n🏆 Acertás el campeón = +6 pts`;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt));
+}
+
+function copyCode(){
+  navigator.clipboard.writeText(prode.roomCode||'').then(()=>{
+    const b=event.target;b.textContent='¡Copiado!';
+    setTimeout(()=>b.textContent='Copiar código',2000);
+  });
+}
+
+/* ═══════════════════════════════════════
+   PWA
+═══════════════════════════════════════ */
+let dPr=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();dPr=e;
+  const b=document.getElementById('and-b');if(b)b.style.display='flex';
+});
+document.getElementById('inst-btn').addEventListener('click',async()=>{
+  if(!dPr)return;dPr.prompt();await dPr.userChoice;dPr=null;
+  document.getElementById('and-b').style.display='none';
+});
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone=window.matchMedia('(display-mode:standalone)').matches||navigator.standalone;
+if(isIOS&&!isStandalone)setTimeout(()=>{document.getElementById('ios-b').style.display='flex';},2500);
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+loadSt();
+renderGroups();
+renderBracket();
+// Restore prode session
+if(st.prode&&st.prode.roomCode){
+  prode.roomCode=st.prode.roomCode;
+  prode.myName=st.prode.myName;
+  prode.roomName=st.prode.roomName;
+  enterRoom();
+}
+updateProg();
+document.getElementById('champ').addEventListener('input',function(){st.champion=this.value;save(false);});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
+<script>
+// Apply Twemoji to render flags as images on all browsers
+function applyTwemoji(){
+  document.querySelectorAll('.m-flag,.tc-flag,.gb-flag,.gb-flags,.hdr-pill,.champ-trophy,.ch-trophy').forEach(el=>{
+    twemoji.parse(el,{
+      folder:'svg',ext:'.svg',
+      callback:(icon,options)=>`${options.base}${options.size}/${icon}${options.ext}`,
+      base:'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
+    });
+  });
+}
+// Run after each render
+const origRefreshGroup=refreshGroup;
+window.refreshGroup=function(gl){
+  origRefreshGroup(gl);
+  setTimeout(applyTwemoji,50);
+};
+const origEnterRoom=enterRoom;
+window.enterRoom=function(){
+  origEnterRoom();
+  setTimeout(applyTwemoji,100);
+};
+// Initial run
+setTimeout(applyTwemoji,300);
+// Run periodically to catch dynamic content
+setInterval(applyTwemoji,2000);
+</script>
+
+</body>
+</html>
